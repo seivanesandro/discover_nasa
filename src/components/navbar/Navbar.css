@@ -1,0 +1,31 @@
+.navbar-collapsed-style{
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    cursor: pointer !important;
+}
+
+
+.navbar-collapsed-style:hover{
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.navbar-collapsed-style:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.navbar-collapsed-style:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.btn-close{
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
