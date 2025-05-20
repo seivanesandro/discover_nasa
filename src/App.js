@@ -8,7 +8,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 function App() {
   return (
     <Router future={{v7_startTransition: true, v7_relativeSplatPath: true}}>
-      {/* <NavBar /> */}
+      <NavBar />
       <div className="App">
         <Main />
       </div>

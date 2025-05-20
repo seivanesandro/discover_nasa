@@ -14,7 +14,7 @@ const ImgStyle = styled.img`
 
 
 const StyleNavLink = styled(NavLink)`
-  color: #000; //TODO:change color to white
+  color: #fff; //TODO:change color to white
   font-size: 1.2rem ;
   font-weight: 400 ;
   text-decoration: none ;
@@ -48,7 +48,7 @@ function OffcanvasExample() {
         <Navbar
           key={expand}
           expand={expand}
-          className="bg-transparent mb-5 border border-bottom border-bottom-light shadow shadow-light">
+          className="bg-transparent mt-4 shadow border-bottom border-light shadow-light">
           <Container fluid>
             <Navbar.Brand href="#" className="d-flex justify-content-end">
               <ImgStyle src={Logo} alt="" style={{width: "130px"}} />
@@ -68,7 +68,7 @@ function OffcanvasExample() {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-center flex-grow-1 gap-5">
-                  <StyleNavLink to="/epicpage" end>Epic</StyleNavLink>
+                  <StyleNavLink to="/" end>Epic</StyleNavLink>
                   <StyleNavLink to="/mars" end>Mars</StyleNavLink>
                   <StyleNavLink to="/asteroids" end>Asteroids</StyleNavLink>
                   <StyleNavLink to="/universe" end>Universe</StyleNavLink>
