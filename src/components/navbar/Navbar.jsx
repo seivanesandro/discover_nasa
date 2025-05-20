@@ -5,32 +5,39 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import "./Navbar.css";
 import styled from "styled-components";
+import {NavLink} from "react-router-dom";
 
 const ImgStyle = styled.img`
-  width: 130px !important;
-  height: auto !important;
+  width: 130px ;
+  height: auto ;
 `;
 
 
-const NavLink = styled.a`
-  color: #000 !important; //TODO:change color to white
-  font-size: 1.2rem !important;
-  font-weight: 400 !important;
-  text-decoration: none !important;
+const StyleNavLink = styled(NavLink)`
+  color: #000; //TODO:change color to white
+  font-size: 1.2rem ;
+  font-weight: 400 ;
+  text-decoration: none ;
+  cursor: pointer ;
+
+  &.active{
+    color:gold;
+  }
+
   &:hover {
-    color: gold !important; 
-    text-decoration: none !important;
-    transition: color 0.3s ease-in-out;
+    color: gold ;
+    text-decoration: none ;
+    transition: color 0.3s ease-in-out ;
   }
   &:active {
-    color: gold !important; 
-    text-decoration: none !important;
-    transition: color 0.3s ease-in-out;
+    color: gold ;
+    text-decoration: none ;
+    transition: color 0.3s ease-in-out ;
   }
   &:focus {
-    color: gold !important; 
-    text-decoration: none !important;
-    transition: color 0.3s ease-in-out;
+    color: gold ;
+    text-decoration: none ;
+    transition: color 0.3s ease-in-out ;
   }
 `;
 
@@ -61,10 +68,10 @@ function OffcanvasExample() {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-center flex-grow-1 gap-5">
-                  <NavLink href="#action1">Epic</NavLink>
-                  <NavLink href="#action2">Mars</NavLink>
-                  <NavLink href="#action2">Asteroids</NavLink>
-                  <NavLink href="#action2">Universe</NavLink>
+                  <StyleNavLink to="/epicpage" end>Epic</StyleNavLink>
+                  <StyleNavLink to="/mars" end>Mars</StyleNavLink>
+                  <StyleNavLink to="/asteroids" end>Asteroids</StyleNavLink>
+                  <StyleNavLink to="/universe" end>Universe</StyleNavLink>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
