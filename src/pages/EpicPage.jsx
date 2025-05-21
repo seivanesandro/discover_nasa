@@ -15,6 +15,7 @@ const ContainerLoading = styled.div`
 
 const ContainerError = styled.div``; 
 const ContainerNoDataReturned = styled.div``;
+
 const EpicContainer = styled.div`
   background: #fff;
   color: #000;
