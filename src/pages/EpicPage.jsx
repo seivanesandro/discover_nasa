@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from "react";
 import Loading from "../components/loading/Loading";
-import axios from "axios";
 import styled from "styled-components";
+import { fetchEpicImages } from "../api/apiNasa"; // Import your fetch function
 //import PropTypes from 'prop-types'
 
-//TODO: criar o card para renderizar data, style for page, de acordo com o planeado, uma imagem de funco, com os cards em contraste, criar o componente erro, com efeito e adicionar estilos de efeitos.
+//TODO: criar o card para renderizar data, 
+//TODO: style for page, de acordo com o planeado 
+//TODO: adicionar uma imagem de fundo 
+//TODO: criar cards globais/especificos
+//TODO:  criar o componente erro e mensagem 
+// TODO: criar um ficheiro so para os fetchs
 
 const ContainerLoading = styled.div`
   display: flex;
@@ -15,27 +20,11 @@ const ContainerLoading = styled.div`
 
 const ContainerError = styled.div``; 
 const ContainerNoDataReturned = styled.div``;
-
-const EpicContainer = styled.div`
-  background: #fff;
-  color: #000;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 10rem 0 10rem 0;
-`;
-
+const EpicContainer = styled.div``;
 const EpicTitle = styled.h2``;
 const EpicDescription = styled.p``;
 const ContainerCardEpic = styled.div``;
 
-
-
-
-const apiUrl = "https://api.nasa.gov/EPIC/api/natural/images?";
-const apiKey = "api_key=Vo9ZpaXL1QOZjGwIxtPK5PFHIOaed70IQcwCCDmD";
 
 const EpicPage = (props) => {
   const [data, setData] = useState(null); // Estado para armazenar os dados da API
@@ -47,15 +36,14 @@ const EpicPage = (props) => {
       setLoad(true);
       setError(null);
       try {
-        const response = await axios.get(`${apiUrl}${apiKey}`, {
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-          },
-        });
-        setData(response.data);
+        const response = await fetchEpicImages(); // Chama a função de fetch
+        setData(response);
       } catch (err) {
-        setError(err);
+        setError(
+          new Error(
+            "Failed to fetch EPIC images. Please try again later."
+          )
+        );
       } finally {
         setLoad(false);
       }
@@ -67,19 +55,19 @@ const EpicPage = (props) => {
   if (load) {
     return (
       <ContainerLoading className="d-flex justify-content-center align-items-center my-5">
-        <Loading speedborder="0.7" fontsize="8" size="1" />
+        <Loading speedborder="0.7" fonts="8" size="1" />
       </ContainerLoading>
     );  
   }
 
 
   if (error) {
-    return <div>Error: {error.message}</div>;  
+    return `ERROR: ${error.message}`; //TODO: criar component erro
   }
 
 
   if (!data || data.length === 0) {
-    return <div>No data available</div>; 
+    return "No data available for EPIC images.";//TODO: criar component mensage 
   }
 
   return (
