@@ -4,7 +4,7 @@ import React from 'react'
 const UniversePage = ({valores}) => {
   return (
     <div>
-      <h1>Universe Page</h1>
+      universe page
 
     </div>
   );

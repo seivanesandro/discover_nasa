@@ -7,11 +7,10 @@ import bgimg from '../assets/4.jpg';
 import ErrorComponent from "../components/error/ErrorComponent";
 import MessageComponent from "../components/message/MessageComponent";
 import CardEpic from "../components/cards/CardEpic";
-//import PropTypes from 'prop-types'
+//import PropTypes from "prop-types";
 
-//TODO: criar o card para renderizar data, 
-//TODO:  criar o componente erro e mensagem 
 
+// global styled-components
 const Show = keyframes`
     0%{
         opacity:0;
@@ -92,6 +91,7 @@ const EpicContainer = styled.div`
   animation: ${Show} 1.5s ease-out;
 `;
 
+//styled-component page
 const EpicContainerapresentation = styled.div`
   &.container-apresentation-epic {
     text-align: center;
@@ -140,12 +140,10 @@ const Epiccontainercard = styled.div`
   }
 `;
 
-
-
-const EpicPage = (props) => {
-  const [data, setData] = useState(null); // Estado para armazenar os dados da API
-  const [load, setLoad] = useState(true); // Estado para controlar o carregamento
-  const [error, setError] = useState(null); // Estado para armazenar erros
+const EpicPage = () => {
+  const [data, setData] = useState(null);
+  const [load, setLoad] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
 
   // Função para procurar o dia mais recente com imagens (até 7 dias atrás)
@@ -207,7 +205,7 @@ const EpicPage = (props) => {
   if (!data || data.length === 0) {
     return (
       <ContainerMessage>
-        <MessageComponent messageFetch="No data available for EPIC images." />
+        <MessageComponent messageFetch="No image in this day" />
       </ContainerMessage>
     );
   }
