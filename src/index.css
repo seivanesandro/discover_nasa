@@ -1,15 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+*,
+::after,
+::before {
+  box-sizing: border-box !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #F9CD74 #222222 !important;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes smooth-effect {
+  0%{
+      opacity:0;
+  }
+  50%{
+      opacity:0.5;
+  }
+
+  100%{
+      opacity:1;
+  }
+}
+
+/*
+animation: smooth-effect 2s ease-out;
+animation: slide-in 2s ease-out;
+*/
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Source Code Pro", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+  color: #fff;
   background: #000 !important;
+  overflow-x: hidden !important;
+  padding-top: 0.1rem;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+a.link-style{
+  color: #F9CD74;
+  font-size: 1.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: "PT Sans Narrow", sans-serif;
+  transition: color 0.3s ease-in-out, text-decoration-color 0.3s ease-in-out;
+
+}
+a.link-style:hover {
+  color: #F9F9F9;
+  transition: color 0.3s ease-in-out, text-decoration-color 0.3s ease-in-out;
+}
+a.link-style:focus {
+  color: #F9F9F9;
+  transition: color 0.3s ease-in-out, text-decoration-color 0.3s ease-in-out;
+}
+a.link-style:active {
+  color: #F9F9F9;
+  transition: color 0.3s ease-in-out, text-decoration-color 0.3s ease-in-out;
+}
+a.link-style:visited {
+  color: #F9F9F9;
+  transition: color 0.3s ease-in-out, text-decoration-color 0.3s ease-in-out;
+}
+
+
+h1,h2,h3,h4,h5,h6{
+  color: #F9CD74;
+  font-weight: 600;
+  font-family: "PT Sans Narrow", sans-serif;
+  margin: 1rem auto;
+  text-transform: uppercase;
+}
+
+p{
+  color: #F9F9F9;
+  font-weight: 500;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  text-transform: lowercase;
+}
+
+em{
+  color: rgba(249, 205, 116, 78%);
+  font-weight: 600;
+  font-family: "PT Sans Narrow", sans-serif;
+}
+strong{
+  color: rgba(249, 205, 116, 78%);
+  font-size: 1rem;
+  text-transform: uppercase !important;
+  font-family: "PT Sans Narrow", sans-serif;
+}
+hr{
+  width: 75%;
+  height: 2px;
+  background: #F7AB12;
+}
+
+*::selection{
+  background: #F9CD74;
+  color: #222222;
+}
+
+.App{
+  margin: 0.5rem auto !important;
+
 }

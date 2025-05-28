@@ -6,6 +6,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import "./Navbar.css";
 import styled from "styled-components";
 import {NavLink} from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const ImgStyle = styled.img`
   width: 130px ;
@@ -42,25 +43,37 @@ const StyleNavLink = styled(NavLink)`
 `;
 
 function OffcanvasExample() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+
   return (
     <>
       {["lg"].map((expand) => (
         <Navbar
           key={expand}
           expand={expand}
-          className="bg-transparent mt-4 shadow border-bottom border-light shadow-light">
+          className={`fixed-top border-bottom border-style ${scrolled ? "navbar-dark-bg" : "bg-transparent"}`}>
           <Container fluid>
             <Navbar.Brand href="#" className="d-flex justify-content-end">
               <ImgStyle src={Logo} alt="" style={{width: "130px"}} />
             </Navbar.Brand>
             <Navbar.Toggle
               aria-controls={`offcanvasNavbar-expand-${expand}`}
-              className="navbar-collapsed-style"
+              className="navbar-collapsed-style text-light"
             />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-              placement="end">
+              placement="end"
+              className="bg-black mt-4 text-light">
               <Offcanvas.Header closeButton className="navbar-collapsed-style">
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
                   <ImgStyle src={Logo} alt="" style={{width: "120px"}} />
@@ -68,10 +81,18 @@ function OffcanvasExample() {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-center flex-grow-1 gap-5">
-                  <StyleNavLink to="/" end>Epic</StyleNavLink>
-                  <StyleNavLink to="/mars" end>Mars</StyleNavLink>
-                  <StyleNavLink to="/asteroids" end>Asteroids</StyleNavLink>
-                  <StyleNavLink to="/universe" end>Universe</StyleNavLink>
+                  <StyleNavLink to="/" end>
+                    Epic
+                  </StyleNavLink>
+                  <StyleNavLink to="/mars" end>
+                    Mars
+                  </StyleNavLink>
+                  <StyleNavLink to="/asteroids" end>
+                    Asteroids
+                  </StyleNavLink>
+                  <StyleNavLink to="/universe" end>
+                    Universe
+                  </StyleNavLink>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>

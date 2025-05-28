@@ -1,30 +1,140 @@
 import React, {useState, useEffect} from "react";
 import Loading from "../components/loading/Loading";
-import styled from "styled-components";
-import { fetchEpicImages } from "../api/apiNasa"; // Import your fetch function
+import styled, { keyframes } from "styled-components";
+import {fetchEpicImages} from "../api/apiNasa";
+import { devices } from "../utils/constantes";
+import ImgLightBoxComponent from "../components/imgLightBox/ImgLightBoxComponent";
+import bgimg from '../assets/4.jpg';
 //import PropTypes from 'prop-types'
 
 //TODO: criar o card para renderizar data, 
-//TODO: style for page, de acordo com o planeado 
-//TODO: adicionar uma imagem de fundo 
-//TODO: criar cards globais/especificos
 //TODO:  criar o componente erro e mensagem 
-// TODO: criar um ficheiro so para os fetchs
+
+const Show = keyframes`
+    0%{
+        opacity:0;
+    }
+    50%{
+        opacity:0.5;
+    }
+
+    100%{
+        opacity:1;
+    }
+`;
+
+const Scale = keyframes`
+    0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50%{
+    transform: scale(1.1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+`;
+
+const Scale2 = keyframes`
+    0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50%{
+    opacity:0.5;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
 
 const ContainerLoading = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 25rem auto !important;
+  animation: ${Scale} 2s ease-out;
 `;
 
-const ContainerError = styled.div``; 
-const ContainerNoDataReturned = styled.div``;
-const EpicContainer = styled.div``;
-const EpicTitle = styled.h2``;
-const EpicDescription = styled.p``;
-const ContainerCardEpic = styled.div``;
+const EpicContainer = styled.div`
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  background-image: url(${bgimg});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  animation: ${Show} 1.5s ease-out;
+`;
 
+const EpicContainerapresentation = styled.div`
+  &.container-apresentation-epic {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 20rem auto 0rem auto;
+    animation: ${Scale} 1.1s ease-out;
+  }
+`;
+
+const EpicDataTime = styled.div`
+  &.epic-data-time {
+    margin: 2rem auto 1rem auto;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  &strong {
+    margin: 2rem auto;
+  }
+`;
+
+const Epiccontainercard = styled.div`
+  &.container-card-epic {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    max-width: 125rem;
+    animation:
+      ${Scale2} 1s ease-out;
+  }
+
+  @media only screen and (${devices.fourk}) {
+    &.container-card-epic {
+      gap: 2rem;
+    }
+  }
+  @media only screen and (${devices.portatilL}) {
+    &.container-card-epic {
+      gap: 1rem;
+    }
+  }
+`;
+
+const EpicCardapresentation = styled.p`
+  text-align: start;
+
+  @media only screen and (${devices.tablet}) {
+    text-align: center;
+  }
+  @media only screen and (${devices.iphone14}) {
+    text-align: center !important;
+  }
+  @media only screen and (${devices.mobileG}) {
+    text-align: center !important;
+  }
+`;
 
 const EpicPage = (props) => {
   const [data, setData] = useState(null); // Estado para armazenar os dados da API
@@ -40,9 +150,7 @@ const EpicPage = (props) => {
         setData(response);
       } catch (err) {
         setError(
-          new Error(
-            "Failed to fetch EPIC images. Please try again later."
-          )
+          new Error("Failed to fetch EPIC images. Please try again later.")
         );
       } finally {
         setLoad(false);
@@ -72,42 +180,59 @@ const EpicPage = (props) => {
 
   return (
     <>
+      <EpicContainer className="epicpage container-fluid text-center">
+        <EpicContainerapresentation className="container-apresentation-epic">
+          <h2 className="epic-title">
+            EPIC - Earth Polychromatic Imaging Camera
+          </h2>
+          <p className="container-description-epic">
+            The EPIC camera onboard the NOAA/NASA DSCOVR spacecraft takes images
+            of the entire sunlit side of Earth every two hours.
+            <br />
+            <em>
+              The images are used to monitor the Earth's atmosphere, weather,
+              and climate.
+            </em>
+          </p>
+          <EpicDataTime className="epic-data-time">
+            {data && data.length > 0 && (
+              <>
+                <strong>Date of images:</strong> {data[0].date.split(" ")[0]}
+              </>
+            )}
+          </EpicDataTime>
+        </EpicContainerapresentation>
 
-      <EpicContainer className="epicPage container-fluid text-center">
-        <h2>EPIC - Earth Polychromatic Imaging Camera</h2>
-        <p>
-          The EPIC camera onboard the NOAA/NASA DSCOVR spacecraft takes images
-          of the entire sunlit side of Earth every two hours.
-          <br />
-          <em>
-            The images are used to monitor the Earth's atmosphere, weather, and
-            climate.
-          </em>
-        </p>
+        <hr />
+        <Epiccontainercard className="container-card-epic">
+          {data &&
+            data.slice(0, 40).map((item) => {
+              const date = item.date.split(" ")[0];
+              const [year, month, day] = date.split("-");
+              const imageUrl = `https://epic.gsfc.nasa.gov/archive/natural/${year}/${month}/${day}/png/${item.image}.png`;
 
-        {data.slice(0, 5).map((item) => {
-          const date = item.date.split(" ")[0];
-          const [year, month, day] = date.split("-");
-          const imageUrl = `https://epic.gsfc.nasa.gov/archive/natural/${year}/${month}/${day}/png/${item.image}.png`;
-
-          return (
-            <div className="container-Card-Epic" key={item.identifier} style={{marginBottom: "20px"}}>
-              <img
-                src={imageUrl}
-                alt={item.caption}
-                style={{width: "300px", borderRadius: "8px"}}
-              />
-              <p>
-                <strong>Data:</strong> {item.date}
-              </p>
-              <p>
-                <strong>Legenda:</strong> {item.caption}
-              </p>
-            </div>
-          );
-        })}
+              return (
+                <div
+                  className="epic-card "
+                  key={item.identifier}
+                  style={{marginBottom: "20px", width: "18rem"}}>
+                  <ImgLightBoxComponent
+                    imageUrl={imageUrl}
+                    caption={`${item.caption || "No legend!"} (${item.date})`}
+                  />
+                  <div className="epic-card-body">
+                    <EpicCardapresentation>
+                      <strong>Date:</strong> {item.date}
+                    </EpicCardapresentation>
+                    <EpicCardapresentation>
+                      <strong>Legend:</strong> {item.caption}
+                    </EpicCardapresentation>
+                  </div>
+                </div>
+              );
+            })}
+        </Epiccontainercard>
       </EpicContainer>
-
     </>
   );
 };
