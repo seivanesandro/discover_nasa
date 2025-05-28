@@ -4,6 +4,11 @@ import ImgLightBoxComponent from "../imgLightBox/ImgLightBoxComponent";
 import styled from 'styled-components';
 import { devices } from '../../utils/constantes';
 
+const CardEpicStyle = styled.div`
+  margin-bottom: 20px;
+  width: 18rem;
+`;
+
 const EpicCardapresentation = styled.p`
   text-align: start;
   padding-left: 1.8rem;
@@ -26,9 +31,9 @@ const CardEpic = ({imageUrl, caption, date}) => {
   return (
     <>
       {" "}
-      <div
+      <CardEpicStyle
         className="epic-card"
-        style={{marginBottom: "20px", width: "18rem"}}>
+        >
         <ImgLightBoxComponent
           imageUrl={imageUrl}
           caption={`${caption || "No legend!"} (${date})`}
@@ -41,7 +46,7 @@ const CardEpic = ({imageUrl, caption, date}) => {
             <strong>Legend:</strong> {caption}
           </EpicCardapresentation>
         </div>
-      </div>
+      </CardEpicStyle>
     </>
   );
 };
