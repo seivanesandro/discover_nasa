@@ -62,3 +62,16 @@ export async function fetchAsteroids({ startDate, endDate }) {
     throw error;
   }
 }
+
+
+// 5. epic image by date
+export async function fetchEpicImagesByDate(date) {
+  try {
+    const response = await axios.get(
+      `${apiUrlEpic}/date/${date}?api_key=${apiKey}`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+} 

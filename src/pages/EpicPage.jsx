@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from "react";
 import Loading from "../components/loading/Loading";
 import styled, { keyframes } from "styled-components";
-import {fetchEpicImages} from "../api/apiNasa";
+import {fetchEpicImagesByDate} from "../api/apiNasa";
 import { devices } from "../utils/constantes";
-import ImgLightBoxComponent from "../components/imgLightBox/ImgLightBoxComponent";
 import bgimg from '../assets/4.jpg';
+import ErrorComponent from "../components/error/ErrorComponent";
+import MessageComponent from "../components/message/MessageComponent";
+import CardEpic from "../components/cards/CardEpic";
 //import PropTypes from 'prop-types'
 
 //TODO: criar o card para renderizar data, 
@@ -57,7 +59,23 @@ const ContainerLoading = styled.div`
   justify-content: center;
   align-items: center;
   margin: 25rem auto !important;
-  animation: ${Scale} 2s ease-out;
+  animation: ${Scale} 2.1s ease-out;
+`;
+
+const ContainerError = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25rem auto !important;
+  animation: ${Scale} 1.1s ease-out;
+`;
+
+const ContainerMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25rem auto !important;
+  animation: ${Scale} 1.1s ease-out;
 `;
 
 const EpicContainer = styled.div`
@@ -122,32 +140,42 @@ const Epiccontainercard = styled.div`
   }
 `;
 
-const EpicCardapresentation = styled.p`
-  text-align: start;
 
-  @media only screen and (${devices.tablet}) {
-    text-align: center;
-  }
-  @media only screen and (${devices.iphone14}) {
-    text-align: center !important;
-  }
-  @media only screen and (${devices.mobileG}) {
-    text-align: center !important;
-  }
-`;
 
 const EpicPage = (props) => {
   const [data, setData] = useState(null); // Estado para armazenar os dados da API
   const [load, setLoad] = useState(true); // Estado para controlar o carregamento
   const [error, setError] = useState(null); // Estado para armazenar erros
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  // Função para procurar o dia mais recente com imagens (até 7 dias atrás)
+  async function fetchMostRecentEpicImages(maxDays = 7) {
+    const today = new Date();
+    for (let i = 0; i < maxDays; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - i);
+      const dateStr = date.toISOString().split("T")[0];
+      try {
+        const response = await fetchEpicImagesByDate(dateStr);
+        if (response && response.length > 0) {
+          return {images: response, date: dateStr};
+        }
+      } catch (err) {
+        // Se der erro, tenta o dia anterior
+        continue;
+      }
+    }
+    return {images: [], date: null};
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       setLoad(true);
       setError(null);
       try {
-        const response = await fetchEpicImages(); // Chama a função de fetch
-        setData(response);
+        const {images, date} = await fetchMostRecentEpicImages(7);
+        setData(images);
+        setSelectedDate(date);
       } catch (err) {
         setError(
           new Error("Failed to fetch EPIC images. Please try again later.")
@@ -165,17 +193,23 @@ const EpicPage = (props) => {
       <ContainerLoading className="d-flex justify-content-center align-items-center my-5">
         <Loading speedborder="0.7" fonts="8" size="1" />
       </ContainerLoading>
-    );  
+    );
   }
-
 
   if (error) {
-    return `ERROR: ${error.message}`; //TODO: criar component erro
+    return (
+      <ContainerError>
+        <ErrorComponent errmessage={error.message} />
+      </ContainerError>
+    )
   }
 
-
   if (!data || data.length === 0) {
-    return "No data available for EPIC images.";//TODO: criar component mensage 
+    return (
+      <ContainerMessage>
+        <MessageComponent messageFetch="No data available for EPIC images." />
+      </ContainerMessage>
+    );
   }
 
   return (
@@ -195,9 +229,9 @@ const EpicPage = (props) => {
             </em>
           </p>
           <EpicDataTime className="epic-data-time">
-            {data && data.length > 0 && (
+            {data && data.length > 0 && selectedDate && (
               <>
-                <strong>Date of images:</strong> {data[0].date.split(" ")[0]}
+                <strong>Date of images:</strong> {selectedDate}
               </>
             )}
           </EpicDataTime>
@@ -212,23 +246,12 @@ const EpicPage = (props) => {
               const imageUrl = `https://epic.gsfc.nasa.gov/archive/natural/${year}/${month}/${day}/png/${item.image}.png`;
 
               return (
-                <div
-                  className="epic-card "
+                <CardEpic
                   key={item.identifier}
-                  style={{marginBottom: "20px", width: "18rem"}}>
-                  <ImgLightBoxComponent
-                    imageUrl={imageUrl}
-                    caption={`${item.caption || "No legend!"} (${item.date})`}
-                  />
-                  <div className="epic-card-body">
-                    <EpicCardapresentation>
-                      <strong>Date:</strong> {item.date}
-                    </EpicCardapresentation>
-                    <EpicCardapresentation>
-                      <strong>Legend:</strong> {item.caption}
-                    </EpicCardapresentation>
-                  </div>
-                </div>
+                  imageUrl={imageUrl}
+                  caption={item.caption}
+                  date={item.date}
+                />
               );
             })}
         </Epiccontainercard>
