@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components';
-import { devices } from '../../utils/constantes';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { devices } from "../../utils/constantes";
 
 const ErrorStyle = styled.span`
   background-color: #f6ba43;
@@ -42,7 +42,7 @@ const ErrorStyle = styled.span`
   }
 `;
 
-const ErrorComponent = ({errmessage}) => {
+const ErrorComponent = ({ errmessage }) => {
   return (
     <>
       <ErrorStyle>ERROR: {errmessage}</ErrorStyle>

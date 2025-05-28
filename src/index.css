@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
 
 *,
 ::after,
 ::before {
   box-sizing: border-box !important;
   scrollbar-width: thin !important;
-  scrollbar-color: #F9CD74 #222222 !important;
+  scrollbar-color: #f9cd74 #222222 !important;
 }
 
 @keyframes slide-in {
@@ -19,15 +19,15 @@
 }
 
 @keyframes smooth-effect {
-  0%{
-      opacity:0;
+  0% {
+    opacity: 0;
   }
-  50%{
-      opacity:0.5;
+  50% {
+    opacity: 0.5;
   }
 
-  100%{
-      opacity:1;
+  100% {
+    opacity: 1;
   }
 }
 
@@ -51,76 +51,88 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-a.link-style{
-  color: #F9CD74;
+a.link-style {
+  color: #f9cd74;
   font-size: 1.5rem;
   text-decoration: none;
   font-weight: 600;
   font-family: "PT Sans Narrow", sans-serif;
-  transition: color 0.3s ease-in-out, text-decoration-color 0.3s ease-in-out;
-
+  transition:
+    color 0.3s ease-in-out,
+    text-decoration-color 0.3s ease-in-out;
 }
 a.link-style:hover {
-  color: #F9F9F9;
-  transition: color 0.3s ease-in-out, text-decoration-color 0.3s ease-in-out;
+  color: #f9f9f9;
+  transition:
+    color 0.3s ease-in-out,
+    text-decoration-color 0.3s ease-in-out;
 }
 a.link-style:focus {
-  color: #F9F9F9;
-  transition: color 0.3s ease-in-out, text-decoration-color 0.3s ease-in-out;
+  color: #f9f9f9;
+  transition:
+    color 0.3s ease-in-out,
+    text-decoration-color 0.3s ease-in-out;
 }
 a.link-style:active {
-  color: #F9F9F9;
-  transition: color 0.3s ease-in-out, text-decoration-color 0.3s ease-in-out;
+  color: #f9f9f9;
+  transition:
+    color 0.3s ease-in-out,
+    text-decoration-color 0.3s ease-in-out;
 }
 a.link-style:visited {
-  color: #F9F9F9;
-  transition: color 0.3s ease-in-out, text-decoration-color 0.3s ease-in-out;
+  color: #f9f9f9;
+  transition:
+    color 0.3s ease-in-out,
+    text-decoration-color 0.3s ease-in-out;
 }
 
-
-h1,h2,h3,h4,h5,h6{
-  color: #F9CD74;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #f9cd74;
   font-weight: 600;
   font-family: "PT Sans Narrow", sans-serif;
   margin: 1rem auto;
   text-transform: uppercase;
 }
 
-p{
-  color: #F9F9F9;
+p {
+  color: #f9f9f9;
   font-weight: 500;
   margin: 1rem auto;
   padding: 0.5rem;
   text-transform: lowercase;
 }
 
-em{
+em {
   color: rgba(249, 205, 116, 78%);
   font-weight: 600;
   font-family: "PT Sans Narrow", sans-serif;
 }
-strong{
+strong {
   color: rgba(249, 205, 116, 78%);
   font-size: 1rem;
   text-transform: uppercase !important;
   font-family: "PT Sans Narrow", sans-serif;
 }
-hr{
+hr {
   width: 75%;
   height: 2px;
-  background: #F7AB12;
+  background: #f7ab12;
 }
 
-*::selection{
-  background: #F9CD74;
+*::selection {
+  background: #f9cd74;
   color: #222222;
 }
 
-.App{
+.App {
   margin: 0.5rem auto !important;
-
 }

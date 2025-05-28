@@ -5,40 +5,39 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import "./Navbar.css";
 import styled from "styled-components";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const ImgStyle = styled.img`
-  width: 130px ;
-  height: auto ;
+  width: 130px;
+  height: auto;
 `;
-
 
 const StyleNavLink = styled(NavLink)`
   color: #fff; //TODO:change color to white
-  font-size: 1.2rem ;
-  font-weight: 400 ;
-  text-decoration: none ;
-  cursor: pointer ;
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
 
-  &.active{
-    color:gold;
+  &.active {
+    color: gold;
   }
 
   &:hover {
-    color: gold ;
-    text-decoration: none ;
-    transition: color 0.3s ease-in-out ;
+    color: gold;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
   }
   &:active {
-    color: gold ;
-    text-decoration: none ;
-    transition: color 0.3s ease-in-out ;
+    color: gold;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
   }
   &:focus {
-    color: gold ;
-    text-decoration: none ;
-    transition: color 0.3s ease-in-out ;
+    color: gold;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
   }
 `;
 
@@ -53,17 +52,17 @@ function OffcanvasExample() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
   return (
     <>
       {["lg"].map((expand) => (
         <Navbar
           key={expand}
           expand={expand}
-          className={`fixed-top border-bottom border-style ${scrolled ? "navbar-dark-bg" : "bg-transparent"}`}>
+          className={`fixed-top border-bottom border-style ${scrolled ? "navbar-dark-bg" : "bg-transparent"}`}
+        >
           <Container fluid>
             <Navbar.Brand href="#" className="d-flex justify-content-end">
-              <ImgStyle src={Logo} alt="" style={{width: "130px"}} />
+              <ImgStyle src={Logo} alt="" style={{ width: "130px" }} />
             </Navbar.Brand>
             <Navbar.Toggle
               aria-controls={`offcanvasNavbar-expand-${expand}`}
@@ -73,10 +72,11 @@ function OffcanvasExample() {
               id={`offcanvasNavbar-expand-${expand}`}
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
               placement="end"
-              className="bg-black mt-4 text-light">
+              className="bg-black mt-4 text-light"
+            >
               <Offcanvas.Header closeButton className="navbar-collapsed-style">
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                  <ImgStyle src={Logo} alt="" style={{width: "120px"}} />
+                  <ImgStyle src={Logo} alt="" style={{ width: "120px" }} />
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>

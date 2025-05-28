@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 import ImgLightBoxComponent from "../imgLightBox/ImgLightBoxComponent";
-import styled from 'styled-components';
-import { devices } from '../../utils/constantes';
+import styled from "styled-components";
+import { devices } from "../../utils/constantes";
 
 const CardEpicStyle = styled.div`
   margin-bottom: 20px;
@@ -26,14 +26,11 @@ const EpicCardapresentation = styled.p`
   }
 `;
 
-
-const CardEpic = ({imageUrl, caption, date}) => {
+const CardEpic = ({ imageUrl, caption, date }) => {
   return (
     <>
       {" "}
-      <CardEpicStyle
-        className="epic-card"
-        >
+      <CardEpicStyle className="epic-card">
         <ImgLightBoxComponent
           imageUrl={imageUrl}
           caption={`${caption || "No legend!"} (${date})`}
@@ -54,7 +51,7 @@ const CardEpic = ({imageUrl, caption, date}) => {
 CardEpic.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   caption: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired
+  date: PropTypes.string.isRequired,
 };
 
 export default CardEpic;

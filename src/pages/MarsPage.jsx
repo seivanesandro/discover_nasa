@@ -1,12 +1,10 @@
-import React from 'react'
+import React from "react";
 //import PropTypes from 'prop-types'
 
-const MarsPage = props => {
-  return (
-    <div>MarsPage</div>
-  )
-}
+const MarsPage = (props) => {
+  return <div>MarsPage</div>;
+};
 
-MarsPage.propTypes = {}
+MarsPage.propTypes = {};
 
-export default MarsPage
+export default MarsPage;

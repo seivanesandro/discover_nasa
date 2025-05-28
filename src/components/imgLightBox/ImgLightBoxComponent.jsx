@@ -1,5 +1,5 @@
 //import PropTypes from 'prop-types'
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import "yet-another-react-lightbox/styles.css";
@@ -32,7 +32,7 @@ const StyleImgLighBox = styled.img`
   }
 `;
 
-const ImgLightBoxComponent = ({imageUrl, caption}) => {
+const ImgLightBoxComponent = ({ imageUrl, caption }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -46,7 +46,7 @@ const ImgLightBoxComponent = ({imageUrl, caption}) => {
         <Lightbox
           open={open}
           close={() => setOpen(false)}
-          slides={[{src: imageUrl, title: caption}]}
+          slides={[{ src: imageUrl, title: caption }]}
           plugins={[Captions]}
         />
       )}

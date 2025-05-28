@@ -1,22 +1,21 @@
-import React from 'react'
+import React from "react";
 import EpicPage from "./EpicPage";
 import AsteroidsPage from "./AsteroidsPage";
 import MarsPage from "./MarsPage";
 import UniversePage from "./UniversePage";
-import {  Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-const Main = props => {
+const Main = (props) => {
   return (
-      
-      <Routes>
-        <Route path="/" element={<EpicPage />} />
-        <Route path="/asteroids" element={<AsteroidsPage />} />
-        <Route path="/mars" element={<MarsPage />} />
-        <Route path="/universe" element={<UniversePage />} />
-      </Routes>
+    <Routes>
+      <Route path="/" element={<EpicPage />} />
+      <Route path="/asteroids" element={<AsteroidsPage />} />
+      <Route path="/mars" element={<MarsPage />} />
+      <Route path="/universe" element={<UniversePage />} />
+    </Routes>
   );
-}
+};
 
-Main.propTypes = {}
+Main.propTypes = {};
 
-export default Main
+export default Main;

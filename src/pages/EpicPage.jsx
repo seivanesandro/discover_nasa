@@ -1,14 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Loading from "../components/loading/Loading";
 import styled, { keyframes } from "styled-components";
-import {fetchEpicImagesByDate} from "../api/apiNasa";
+import { fetchEpicImagesByDate } from "../api/apiNasa";
 import { devices } from "../utils/constantes";
-import bgimg from '../assets/4.jpg';
+import bgimg from "../assets/4.jpg";
 import ErrorComponent from "../components/error/ErrorComponent";
 import MessageComponent from "../components/message/MessageComponent";
 import CardEpic from "../components/cards/CardEpic";
 //import PropTypes from "prop-types";
-
 
 // global styled-components
 const Show = keyframes`
@@ -124,8 +123,7 @@ const Epiccontainercard = styled.div`
     align-items: center;
     gap: 2rem;
     max-width: 125rem;
-    animation:
-      ${Scale2} 1s ease-out;
+    animation: ${Scale2} 1s ease-out;
   }
 
   @media only screen and (${devices.fourk}) {
@@ -156,14 +154,14 @@ const EpicPage = () => {
       try {
         const response = await fetchEpicImagesByDate(dateStr);
         if (response && response.length > 0) {
-          return {images: response, date: dateStr};
+          return { images: response, date: dateStr };
         }
       } catch (err) {
         // Se der erro, tenta o dia anterior
         continue;
       }
     }
-    return {images: [], date: null};
+    return { images: [], date: null };
   }
 
   useEffect(() => {
@@ -171,12 +169,12 @@ const EpicPage = () => {
       setLoad(true);
       setError(null);
       try {
-        const {images, date} = await fetchMostRecentEpicImages(7);
+        const { images, date } = await fetchMostRecentEpicImages(7);
         setData(images);
         setSelectedDate(date);
       } catch (err) {
         setError(
-          new Error("Failed to fetch EPIC images. Please try again later.")
+          new Error("Failed to fetch EPIC images. Please try again later."),
         );
       } finally {
         setLoad(false);
@@ -199,7 +197,7 @@ const EpicPage = () => {
       <ContainerError>
         <ErrorComponent errmessage={error.message} />
       </ContainerError>
-    )
+    );
   }
 
   if (!data || data.length === 0) {

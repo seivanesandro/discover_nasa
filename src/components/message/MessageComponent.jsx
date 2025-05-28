@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import {devices} from "../../utils/constantes";
+import { devices } from "../../utils/constantes";
 
 const MessageStyle = styled.span`
   background-color: #f6ba43;
@@ -43,7 +43,7 @@ const MessageStyle = styled.span`
   }
 `;
 
-const MessageComponent = ({messageFetch}) => {
+const MessageComponent = ({ messageFetch }) => {
   return (
     <>
       <MessageStyle>{messageFetch}</MessageStyle>

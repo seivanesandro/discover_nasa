@@ -1,6 +1,4 @@
-import styled, {
-    keyframes
-} from 'styled-components';
+import styled, { keyframes } from "styled-components";
 //import PropTypes from 'prop-types';
 
 const Spinner = keyframes`
@@ -32,23 +30,21 @@ const Spinner = keyframes`
 `;
 
 const Loading = styled.div`
-    font-size: ${({ fonts }) => fonts}px;
-    width: ${({ size }) => size}em;
-    height: ${({ size }) => size}em;
-    border-radius: 50%;
-    position: relative;
-    text-indent: -9999em;
-    animation: ${Spinner}
-        ${({ speedborder }) => speedborder}s
-        infinite ease-out;
-    transform: translateZ(0);
-    z-index: 100;
+  font-size: ${({ fonts }) => fonts}px;
+  width: ${({ size }) => size}em;
+  height: ${({ size }) => size}em;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  animation: ${Spinner} ${({ speedborder }) => speedborder}s infinite ease-out;
+  transform: translateZ(0);
+  z-index: 100;
 `;
 
 Loading.defaultProps = {
-    speedborder: '0.7',
-    fonts: '8',
-    size: '1'
+  speedborder: "0.7",
+  fonts: "8",
+  size: "1",
 };
 
 export default Loading;
