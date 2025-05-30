@@ -11,7 +11,6 @@ const CardMarsStyle = styled.div`
   border-radius: 6px;
   background: #222;
   &:hover {
-    cursor: pointer;
     transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(249, 205, 116, 28%);
   }
