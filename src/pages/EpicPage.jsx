@@ -3,7 +3,7 @@ import Loading from "../components/loading/Loading";
 import styled, { keyframes } from "styled-components";
 import { fetchEpicImagesByDate } from "../api/apiNasa";
 import { devices } from "../utils/constantes";
-import bgimg from "../assets/4.jpg";
+import bgimg from "../assets/artwork.png";
 import ErrorComponent from "../components/error/ErrorComponent";
 import MessageComponent from "../components/message/MessageComponent";
 import CardEpic from "../components/cards/CardEpic";
@@ -84,15 +84,20 @@ const EpicContainer = styled.div`
   align-items: center;
   gap: 3rem;
   background-image: url(${bgimg});
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  
   animation: ${Show} 1.5s ease-out;
+  @media only screen and (max-width: 768px) {
+    background-position: center top;
+    min-height: 100svh;
+  }
 `;
 
 //styled-component page
-const EpicContainerapresentation = styled.div`
-  &.container-apresentation-epic {
+const EpicContainerHeader = styled.div`
+  &.epic-container-header {
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -115,7 +120,7 @@ const EpicDataTime = styled.div`
 `;
 
 const Epiccontainercard = styled.div`
-  &.container-card-epic {
+  &.epic-container-card {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -123,6 +128,7 @@ const Epiccontainercard = styled.div`
     align-items: center;
     gap: 2rem;
     max-width: 125rem;
+    margin: 0 auto 25rem auto !important;
     animation: ${Scale2} 1s ease-out;
   }
 
@@ -211,7 +217,7 @@ const EpicPage = () => {
   return (
     <>
       <EpicContainer className="epicpage container-fluid text-center">
-        <EpicContainerapresentation className="container-apresentation-epic">
+        <EpicContainerHeader className="epic-container-header">
           <h2 className="epic-title">
             EPIC - Earth Polychromatic Imaging Camera
           </h2>
@@ -231,10 +237,10 @@ const EpicPage = () => {
               </>
             )}
           </EpicDataTime>
-        </EpicContainerapresentation>
+        </EpicContainerHeader>
 
         <hr />
-        <Epiccontainercard className="container-card-epic">
+        <Epiccontainercard className="epic-container-card">
           {data &&
             data.slice(0, 40).map((item) => {
               const date = item.date.split(" ")[0];

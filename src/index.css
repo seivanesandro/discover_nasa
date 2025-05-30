@@ -114,11 +114,12 @@ p {
 em {
   color: rgba(249, 205, 116, 78%);
   font-weight: 600;
+  font-size: 1.1rem;
   font-family: "PT Sans Narrow", sans-serif;
 }
 strong {
   color: rgba(249, 205, 116, 78%);
-  font-size: 1rem;
+  font-size: 1.1rem;
   text-transform: uppercase !important;
   font-family: "PT Sans Narrow", sans-serif;
 }
@@ -127,6 +128,31 @@ hr {
   height: 2px;
   background: #f7ab12;
 }
+
+select{
+  outline: none !important;
+  background: #222222 !important;
+  color: #f9cd74 !important;
+  border: 1px solid #f9cd74 !important;
+  border-radius: 4px !important;
+  padding: 0.5rem !important;
+}
+
+select:hover {
+  border: 1px solid #000 !important;
+  outline: none !important;
+}
+select:active {
+  border: 1px solid #000 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+select:focus {
+  border: 1px solid #000 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 
 *::selection {
   background: #f9cd74;
