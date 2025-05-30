@@ -7,6 +7,8 @@ import Loading from "../components/loading/Loading";
 import { devices } from "../utils/constantes";
 import bgimg from "../assets/marsai.png";
 import CardMars from "../components/cards/CardMars";
+import Lightbox from "yet-another-react-lightbox";
+import Captions from "yet-another-react-lightbox/plugins/captions";
 // import PropTypes from 'prop-types'
 
 // global styled-components
@@ -105,9 +107,13 @@ const MarsContainerHeader = styled.div`
   text-align: left !important;
   animation: ${Scale} 1.1s ease-out;
 
-  @media only screen and (${devices.portatilL}) {
-    margin: 20rem 8rem;
+  @media only screen and (${devices.vivusBook}) {
+    margin: 20rem 8rem !important;
   }
+  @media only screen and (${devices.portatilL}) {
+    margin: 20rem 8rem !important;
+  }
+
   @media only screen and (${devices.portatil}) {
     margin: 20rem 3rem !important;
   }
@@ -172,6 +178,13 @@ const MarsPage = (props) => {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const slides = photos.slice(0, 20).map((photo) => ({
+    src: photo.img_src,
+    title: `${photo.camera.name} (${photo.earth_date})`,
+  }));
 
   async function fetchMostRecentMarsPhotos(rover, maxTries = 10) {
     let latestSol = await fetchLatestSol(rover);
@@ -264,13 +277,12 @@ const MarsPage = (props) => {
         aria-label="Select a Mars Rover"
         id="select-rover"
         value={selectedRover}
-        onChange={(e) => setSelectRover(e.target.value)}
-      >
+        onChange={(e) => setSelectRover(e.target.value)}>
         <option value="curiosity">Curiosity</option>
         <option value="perseverance">Perseverance</option>
       </MarsSelectedRover>
       <MarsContainerCards className="mars-container-cards">
-        {photos.slice(0, 20).map((photo) => (
+        {photos.slice(0, 20).map((photo, idx) => (
           <CardMars
             key={photo.id}
             imageUrl={photo.img_src}
@@ -279,8 +291,19 @@ const MarsPage = (props) => {
             name={photo.rover.name}
             fullname={photo.camera.full_name}
             earthdate={photo.earth_date}
+            onImageClick={() => {
+              setLightboxIndex(idx);
+              setLightboxOpen(true);
+            }}
           />
         ))}
+        <Lightbox
+          open={lightboxOpen}
+          close={() => setLightboxOpen(false)}
+          slides={slides}
+          index={lightboxIndex}
+          plugins={[Captions]}
+        />
       </MarsContainerCards>
     </MarsContainer>
   );

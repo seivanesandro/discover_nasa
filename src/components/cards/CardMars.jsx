@@ -52,7 +52,15 @@ const MarsCardapresentation = styled.p`
   }
 `;
 
-const CardMars = ({ imageUrl, caption, date, name, fullname, earthdate }) => {
+const CardMars = ({
+  imageUrl,
+  caption,
+  date,
+  name,
+  fullname,
+  earthdate,
+  onImageClick,
+}) => {
   return (
     <>
       {" "}
@@ -68,6 +76,7 @@ const CardMars = ({ imageUrl, caption, date, name, fullname, earthdate }) => {
               display: "block",
               margin: "0 auto",
             }}
+            onClick={onImageClick}
           />
         </MarsPhotosContainer>
         <MarsPhotoInfo className=" mars-photo-info text-center p-2">
@@ -93,6 +102,7 @@ CardMars.propTypes = {
   name: PropTypes.string,
   fullname: PropTypes.string,
   earthdate: PropTypes.string,
+  onImageClick: PropTypes.func.isRequired,
 };
 
 export default CardMars;

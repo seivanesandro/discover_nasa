@@ -7,6 +7,8 @@ import bgimg from "../assets/artwork.png";
 import ErrorComponent from "../components/error/ErrorComponent";
 import MessageComponent from "../components/message/MessageComponent";
 import CardEpic from "../components/cards/CardEpic";
+import Lightbox from "yet-another-react-lightbox";
+import Captions from "yet-another-react-lightbox/plugins/captions";
 //import PropTypes from "prop-types";
 
 // global styled-components
@@ -145,10 +147,24 @@ const Epiccontainercard = styled.div`
 `;
 
 const EpicPage = () => {
+  
   const [data, setData] = useState(null);
   const [load, setLoad] = useState(true);
   const [error, setError] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+  
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const slides = (data || []).slice(0, 40).map((item) => {
+    const date = item.date.split(" ")[0];
+    const [year, month, day] = date.split("-");
+    const imageUrl = `https://epic.gsfc.nasa.gov/archive/natural/${year}/${month}/${day}/png/${item.image}.png`;
+    return {
+      src: imageUrl,
+      title: `${item.caption} (${item.date})`,
+    };
+  });
 
   // Função para procurar o dia mais recente com imagens (até 7 dias atrás)
   async function fetchMostRecentEpicImages(maxDays = 7) {
@@ -242,7 +258,7 @@ const EpicPage = () => {
         <hr />
         <Epiccontainercard className="epic-container-card">
           {data &&
-            data.slice(0, 40).map((item) => {
+            data.slice(0, 40).map((item, idx) => {
               const date = item.date.split(" ")[0];
               const [year, month, day] = date.split("-");
               const imageUrl = `https://epic.gsfc.nasa.gov/archive/natural/${year}/${month}/${day}/png/${item.image}.png`;
@@ -253,9 +269,20 @@ const EpicPage = () => {
                   imageUrl={imageUrl}
                   caption={item.caption}
                   date={item.date}
+                  onImageClick={() => {
+                    setLightboxIndex(idx);
+                    setLightboxOpen(true);
+                  }}
                 />
               );
             })}
+          <Lightbox
+            open={lightboxOpen}
+            close={() => setLightboxOpen(false)}
+            slides={slides}
+            index={lightboxIndex}
+            plugins={[Captions]}
+          />
         </Epiccontainercard>
       </EpicContainer>
     </>

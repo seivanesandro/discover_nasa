@@ -26,7 +26,7 @@ const EpicCardapresentation = styled.p`
   }
 `;
 
-const CardEpic = ({ imageUrl, caption, date }) => {
+const CardEpic = ({imageUrl, caption, date, onImageClick}) => {
   return (
     <>
       {" "}
@@ -34,6 +34,7 @@ const CardEpic = ({ imageUrl, caption, date }) => {
         <ImgLightBoxComponent
           imageUrl={imageUrl}
           caption={`${caption || "No legend!"} (${date})`}
+          onClick={onImageClick}
         />
         <div className="epic-card-body text-center">
           <EpicCardapresentation>
@@ -52,6 +53,7 @@ CardEpic.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   caption: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
+  onImageClick: PropTypes.func.isRequired,
 };
 
 export default CardEpic;

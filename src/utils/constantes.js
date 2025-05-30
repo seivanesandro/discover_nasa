@@ -80,6 +80,7 @@ const responsivePoints = {
   portatilS: "832px",
   portatil: "1024px",
   portatilL: "1440px",
+  vivusBook: "1514px",
   fourk: "2560px",
 };
 
@@ -92,5 +93,6 @@ export const devices = {
   portatilS: `( max-width: ${responsivePoints.portatilS} )`,
   portatil: `( max-width: ${responsivePoints.portatil} )`,
   portatilL: `( max-width: ${responsivePoints.portatilL} )`,
+  vivusBook: `( max-width: ${responsivePoints.vivusBook} )`,
   fourk: `( max-width: ${responsivePoints.fourk} )`,
 };

@@ -1,7 +1,5 @@
 //import PropTypes from 'prop-types'
-import React, { useState } from "react";
-import Lightbox from "yet-another-react-lightbox";
-import Captions from "yet-another-react-lightbox/plugins/captions";
+import PropTypes from "prop-types";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
 import styled, { keyframes } from "styled-components";
@@ -32,28 +30,24 @@ const StyleImgLighBox = styled.img`
   }
 `;
 
-const ImgLightBoxComponent = ({ imageUrl, caption }) => {
-  const [open, setOpen] = useState(false);
+const ImgLightBoxComponent = ({imageUrl, caption, onClick}) => {
 
   return (
     <>
       <StyleImgLighBox
         src={imageUrl}
         alt={caption}
-        onClick={() => setOpen(true)}
+        onClick={ onClick}
       />
-      {open && (
-        <Lightbox
-          open={open}
-          close={() => setOpen(false)}
-          slides={[{ src: imageUrl, title: caption }]}
-          plugins={[Captions]}
-        />
-      )}
+
     </>
   );
 };
 
-ImgLightBoxComponent.propTypes = {};
+ImgLightBoxComponent.propTypes = {
+  imageUrl: PropTypes.string.isRequired,
+  caption: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default ImgLightBoxComponent;
