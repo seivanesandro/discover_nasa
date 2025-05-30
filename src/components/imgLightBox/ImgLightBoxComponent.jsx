@@ -25,7 +25,7 @@ const StyleImgLighBox = styled.img`
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s;
-  animation: ${Show} 2.5s ease-out; 
+  animation: ${Show} 2.5s ease-out;
 
   &:hover {
     transform: scale(1.03);

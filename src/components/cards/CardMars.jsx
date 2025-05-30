@@ -52,7 +52,7 @@ const MarsCardapresentation = styled.p`
   }
 `;
 
-const CardMars = ({imageUrl,caption,date, name, fullname, earthdate}) => {
+const CardMars = ({ imageUrl, caption, date, name, fullname, earthdate }) => {
   return (
     <>
       {" "}

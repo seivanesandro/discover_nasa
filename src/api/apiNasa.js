@@ -51,8 +51,6 @@ export async function fetchLatestSol(rover) {
   }
 }
 
-
-
 // 3. EPIC (Earth Polychromatic Imaging Camera)
 export async function fetchEpicImages() {
   try {

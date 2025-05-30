@@ -87,7 +87,7 @@ const EpicContainer = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  
+
   animation: ${Show} 1.5s ease-out;
   @media only screen and (max-width: 768px) {
     background-position: center top;

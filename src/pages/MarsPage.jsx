@@ -127,6 +127,28 @@ const MarsSelectedRover = styled.select`
   text-align: center;
   width: 50%;
   margin: 5rem auto;
+
+  outline: none !important;
+  background: #222222 !important;
+  color: #f9cd74 !important;
+  border: 1px solid rgba(249, 205, 116, 28%) !important;
+  border-radius: 4px !important;
+  padding: 0.5rem !important;
+
+  &:hover {
+    border: 1px solid rgba(249, 205, 116, 28%) !important;
+    outline: none !important;
+  }
+  &:active {
+    border: 1px solid rgba(249, 205, 116, 28%) !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  &:focus {
+    border: 1px solid rgba(249, 205, 116, 28%) !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
 `;
 
 const MarsContainerCards = styled.div`
@@ -147,15 +169,15 @@ const MarsContainerCards = styled.div`
 
 const MarsPage = (props) => {
   const [selectedRover, setSelectRover] = useState("curiosity");
-  const [ photos, setPhotos ] = useState([]);
-  const [ loading, setLoading ] = useState(true);
-  const [ error, setError ] = useState(null);
+  const [photos, setPhotos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   async function fetchMostRecentMarsPhotos(rover, maxTries = 10) {
     let latestSol = await fetchLatestSol(rover);
     for (let i = 0; i < maxTries; i++) {
       try {
-        const data = await fetchMarsPhotos({rover, sol: latestSol - i});
+        const data = await fetchMarsPhotos({ rover, sol: latestSol - i });
         if (data.photos && data.photos.length > 0) {
           return data.photos;
         }
@@ -242,7 +264,8 @@ const MarsPage = (props) => {
         aria-label="Select a Mars Rover"
         id="select-rover"
         value={selectedRover}
-        onChange={(e) => setSelectRover(e.target.value)}>
+        onChange={(e) => setSelectRover(e.target.value)}
+      >
         <option value="curiosity">Curiosity</option>
         <option value="perseverance">Perseverance</option>
       </MarsSelectedRover>
