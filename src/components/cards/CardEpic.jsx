@@ -26,7 +26,7 @@ const EpicCardapresentation = styled.p`
   }
 `;
 
-const CardEpic = ({imageUrl, caption, date, onImageClick}) => {
+const CardEpic = ({ imageUrl, caption, date, onImageClick }) => {
   return (
     <>
       {" "}

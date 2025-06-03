@@ -4,13 +4,10 @@ import styled from "styled-components";
 import { devices } from "../../utils/constantes";
 
 const ErrorStyle = styled.span`
-  background-color: #f6ba43;
-  color: #222 !important;
+  color: #f6ba43 !important;
   font-size: 1.5rem;
   text-align: center;
-  width: 50%;
-  box-shadow: 0 0 0.4rem rgb(255, 255, 255);
-
+  width: ${({ width }) => (width ? width : "100%")};
   @media only screen and (${devices.portatilL}) {
     font-size: 1.2rem;
   }

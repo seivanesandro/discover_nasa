@@ -147,12 +147,11 @@ const Epiccontainercard = styled.div`
 `;
 
 const EpicPage = () => {
-  
   const [data, setData] = useState(null);
   const [load, setLoad] = useState(true);
   const [error, setError] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
-  
+
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 

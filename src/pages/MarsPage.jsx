@@ -277,7 +277,8 @@ const MarsPage = (props) => {
         aria-label="Select a Mars Rover"
         id="select-rover"
         value={selectedRover}
-        onChange={(e) => setSelectRover(e.target.value)}>
+        onChange={(e) => setSelectRover(e.target.value)}
+      >
         <option value="curiosity">Curiosity</option>
         <option value="perseverance">Perseverance</option>
       </MarsSelectedRover>

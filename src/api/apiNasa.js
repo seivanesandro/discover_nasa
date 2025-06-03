@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apiKey = process.env.REACT_APP_NASA_API_KEY;
 const apiUrlApod = process.env.REACT_APP_NASA_URL_APOD;
-const apiUrlAsteroids = process.env.REACT_APP_NASA_URL_ASTEROIDS;
+const apiUrlLibrary = process.env.REACT_APP_NASA_URL_LIBRARY;
 const apiUrlEpic = process.env.REACT_APP_NASA_URL_EPIC;
 
 const apiUrlMars = process.env.REACT_APP_NASA_URL_MARS;
@@ -61,13 +61,20 @@ export async function fetchEpicImages() {
   }
 }
 
-// 4. Asteroids Feed
-export async function fetchAsteroids({ startDate, endDate }) {
+// 4. library api , images and videos
+export async function searchNasaMedia(
+  query,
+  mediaType = "",
+  yearStart = "",
+  yearEnd = "",
+) {
   try {
-    const response = await axios.get(
-      `${apiUrlAsteroids}?start_date=${startDate}&end_date=${endDate}&api_key=${apiKey}`,
-    );
-    return response.data;
+    let url = `${apiUrlLibrary}/search?q=${encodeURIComponent(query)}`;
+    if (mediaType) url += `&media_type=${mediaType}`;
+    if (yearStart) url += `&year_start=${yearStart}`;
+    if (yearEnd) url += `&year_end=${yearEnd}`;
+    const response = await axios.get(url);
+    return response.data.collection.items;
   } catch (error) {
     throw error;
   }

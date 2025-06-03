@@ -123,6 +123,12 @@ strong {
   text-transform: uppercase !important;
   font-family: "PT Sans Narrow", sans-serif;
 }
+strong.p-description {
+  color: rgba(249, 205, 116, 78%);
+  font-size: 1.1rem;
+  text-transform: uppercase !important;
+  font-family: "PT Sans Narrow", sans-serif;
+}
 hr {
   width: 75%;
   height: 2px;

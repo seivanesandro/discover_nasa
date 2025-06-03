@@ -30,16 +30,10 @@ const StyleImgLighBox = styled.img`
   }
 `;
 
-const ImgLightBoxComponent = ({imageUrl, caption, onClick}) => {
-
+const ImgLightBoxComponent = ({ imageUrl, caption, onClick }) => {
   return (
     <>
-      <StyleImgLighBox
-        src={imageUrl}
-        alt={caption}
-        onClick={ onClick}
-      />
-
+      <StyleImgLighBox src={imageUrl} alt={caption} onClick={onClick} />
     </>
   );
 };
