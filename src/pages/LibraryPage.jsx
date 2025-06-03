@@ -15,7 +15,7 @@ import Captions from "yet-another-react-lightbox/plugins/captions";
 import CardLibrary from "../components/cards/CardLibrary";
 import CardLibraryVideo from "../components/cards/CardLibraryVideo";
 
-// TODO:: ajustar style em falta, fazer o style do input+btn
+// TODO:: ajustar style em falta, fazer o style do input+btn, e o texto do header
 // TODO:: adicionar elemento de ajuda para o utilizador ex para pesquisar 
 
 // global styled-components
