@@ -58,14 +58,16 @@ function OffcanvasExample() {
         <Navbar
           key={expand}
           expand={expand}
-          className={`fixed-top border-bottom border-style ${scrolled ? "navbar-dark-bg" : "bg-transparent"}`}>
+          className={`fixed-top border-bottom border-style ${scrolled ? "navbar-dark-bg" : "bg-transparent"}`}
+        >
           <Container fluid>
             <Navbar.Brand
               as="div"
               className="d-flex justify-content-end"
-              style={{cursor: "pointer"}}
-              onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}>
-              <ImgStyle src={Logo} alt="" style={{width: "130px"}} />
+              style={{ cursor: "pointer" }}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
+              <ImgStyle src={Logo} alt="" style={{ width: "130px" }} />
             </Navbar.Brand>
             <Navbar.Toggle
               aria-controls={`offcanvasNavbar-expand-${expand}`}
@@ -75,10 +77,11 @@ function OffcanvasExample() {
               id={`offcanvasNavbar-expand-${expand}`}
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
               placement="end"
-              className="bg-black mt-4 text-light">
+              className="bg-black mt-4 text-light"
+            >
               <Offcanvas.Header closeButton className="navbar-collapsed-style">
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                  <ImgStyle src={Logo} alt="" style={{width: "120px"}} />
+                  <ImgStyle src={Logo} alt="" style={{ width: "120px" }} />
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>

@@ -41,9 +41,9 @@ const ContainerDescriptionExtra = styled.div`
   align-items: start;
 `;
 
-const CardLibraryVideo = ({title, nasa_id, poster, description, date}) => (
+const CardLibraryVideo = ({ title, nasa_id, poster, description, date }) => (
   <Card>
-    <h4 style={{textAlign: "center"}}>{title}</h4>
+    <h4 style={{ textAlign: "center" }}>{title}</h4>
     <VideoPlayerComponent nasa_id={nasa_id} poster={poster} />
     <ContianerDescription className="contianer-description">
       <p className="text-start p-description">

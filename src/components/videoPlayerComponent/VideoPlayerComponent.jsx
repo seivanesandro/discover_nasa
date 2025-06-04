@@ -47,7 +47,6 @@ const getVideoUrl = async (nasa_id) => {
 const VideoPlayerComponent = ({ nasa_id, poster }) => {
   const [videoUrl, setVideoUrl] = useState(undefined);
 
-
   useEffect(() => {
     setVideoUrl(undefined);
     getVideoUrl(nasa_id).then(setVideoUrl);
@@ -72,13 +71,12 @@ const VideoPlayerComponent = ({ nasa_id, poster }) => {
           controls
           poster={poster}
           className="video-player"
-          >
+        >
           <track kind="captions" srcLang="en" label="English" />
           <track kind="captions" srcLang="pt" label="Português" />
           <source src={videoUrl} type="video/mp4" />O teu browser não suporta
           vídeo.
         </VideoPlayerComponentStyle>
-
       </VideoPlayerWrapper>
     </>
   );

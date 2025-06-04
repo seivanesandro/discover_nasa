@@ -9,14 +9,15 @@ import MessageComponent from "../components/message/MessageComponent";
 
 import { devices } from "../utils/constantes";
 import bgimg from "../assets/2204A.jpg";
-import bgimgmobile from "../assets/2204B.jpg"
+import bgimgmobile from "../assets/2204B.jpg";
 import Lightbox from "yet-another-react-lightbox";
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import CardLibrary from "../components/cards/CardLibrary";
 import CardLibraryVideo from "../components/cards/CardLibraryVideo";
+import DefaultInput from "../components/common/DefaultInput";
 
-// TODO:: ajustar style em falta, fazer o style do input+btn, e o texto do header
-// TODO:: adicionar elemento de ajuda para o utilizador ex para pesquisar 
+// TODO:: ajustar style em falta, margens e cards tem de estar alinhados, fazer o style do input+btn, e o texto do header
+// TODO:: adicionar elemento de ajuda para o utilizador ex para pesquisar
 
 // global styled-components
 const Show = keyframes`
@@ -65,7 +66,7 @@ const ContainerLoading = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  margin: 10rem auto 17rem auto;
   animation: ${Scale} 2.1s ease-out;
 `;
 
@@ -73,7 +74,7 @@ const ContainerError = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 25rem auto !important;
+  margin: 0 auto 17rem auto;
   animation: ${Scale} 1.1s ease-out;
 `;
 
@@ -81,7 +82,7 @@ const ContainerMessage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 25rem auto !important;
+  margin: 0 auto 17rem auto;
   animation: ${Scale} 1.1s ease-out;
 `;
 
@@ -98,7 +99,7 @@ const LibraryContainer = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-  animation: ${Show} 1.5s ease-out;
+  animation: ${Show} 1.8s ease-out;
 
   @media only screen and (${devices.tablet}) {
     background-image: url(${bgimgmobile});
@@ -108,23 +109,26 @@ const LibraryContainer = styled.div`
 
 //styled-component page
 const LibraryContainerHeader = styled.div`
-  text-align: center;
+  text-align: justify;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   margin: 13rem 25rem 5rem 25rem;
-  text-align: left !important;
+  width: 50%;
   animation: ${Scale} 1.1s ease-out;
 
   @media only screen and (${devices.vivusBook}) {
     margin: 10rem 8rem !important;
+    width: 50%;
   }
   @media only screen and (${devices.portatilL}) {
-    margin: 10rem 8rem !important;
+    margin: 10rem auto !important;
+    width: 70%;
   }
 
   @media only screen and (${devices.portatil}) {
-    margin: 8rem 3rem !important;
+    margin: 8rem auto !important;
+    width: 95% !important;
   }
   @media only screen and (${devices.iphone14}) {
     margin: 8rem auto !important;
@@ -137,19 +141,37 @@ const LibraryContainerHeader = styled.div`
   }
 `;
 
-const LibraryContainerForm = styled.div``;
+const LibraryContainerForm = styled.div`
+  width: 50%;
+  margin: 0 auto 2rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: ${Scale} 1.3s ease-out;
+
+  @media only screen and (${devices.portatilL}) {
+    width: 70%;
+  }
+  @media only screen and (${devices.portatil}) {
+    width: 95% !important;
+  }
+  @media only screen and (${devices.iphone14}),
+    only screen and (${devices.mobileG}),
+    only screen and (${devices.mobileP}) {
+    width: 98% !important;
+  }
+`;
 
 const LibraryFormStyle = styled.form`
   width: 100%;
-  max-width: 32rem;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 
-  @media only screen and (${devices.mobileP}) {
+  @media only screen and (${devices.tablet}) {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.7rem;
   }
 `;
 
@@ -305,21 +327,28 @@ const LibraryPage = (props) => {
                 block: "start",
               });
             }, 100);
-          }}>
-          <input
-            type="text"
-            className="library-input-search form-control"
-            name="search"
-            placeholder="Search for videos or images of NASA..."
-            value={searchInput}
-            onChange={e => setSearchInput(e.target.value)}
+          }}
+        >
+          <DefaultInput
+            inputType="text"
+            inputCLassName="library-input-search form-control"
+            inputName="search"
+            inputPlaceholder="Search for videos or images of NASA..."
+            inputValue={searchInput}
+            inputOnChange={(e) => setSearchInput(e.target.value)}
           />
-          <input type="submit" value="Search" className="btn btn-light" />
+
+          <DefaultInput
+            inputType="submit"
+            inputValue="Search"
+            inputCLassName="btn btn-light"
+          />
         </LibraryFormStyle>
       </LibraryContainerForm>
       <LibraryContainerCards
         className="library-container-cards"
-        ref={resultsRef}>
+        ref={resultsRef}
+      >
         {loading ? (
           <ContainerLoading>
             <Loading speedborder="0.7" fonts="8" size="1" />
@@ -330,10 +359,7 @@ const LibraryPage = (props) => {
           </ContainerError>
         ) : !data || data.length === 0 ? (
           <ContainerMessage>
-            <MessageComponent
-              messageFetch={`No data for: ${query}`}
-              width="87%"
-            />
+            <MessageComponent messageFetch={`No data for: ${query}`} />
           </ContainerMessage>
         ) : (
           data.map((item) => {
@@ -349,7 +375,7 @@ const LibraryPage = (props) => {
                   date={dataItem.date_created}
                   onClick={() => {
                     const idx = imageSlides.findIndex(
-                      (img) => img.src === link.href
+                      (img) => img.src === link.href,
                     );
                     setLightboxIndex(idx);
                     setLightboxOpen(true);
