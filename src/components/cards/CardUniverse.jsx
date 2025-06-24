@@ -32,7 +32,6 @@ const Scale = keyframes`
   }
 `;
 
-
 const Card = styled.div`
   background: rgba(34, 34, 34, 0.97);
   border-radius: 18px;
@@ -82,7 +81,12 @@ const CardDesc = styled.p`
 
 const CardUniverse = ({ image, title, description, onClick }) => (
   <Card>
-    <CardImage src={image} alt={title} onClick={onClick} style={{ cursor: "pointer" }} />
+    <CardImage
+      src={image}
+      alt={title}
+      onClick={onClick}
+      style={{ cursor: "pointer" }}
+    />
     <CardTitle>{title}</CardTitle>
     <CardDesc>{description}</CardDesc>
   </Card>

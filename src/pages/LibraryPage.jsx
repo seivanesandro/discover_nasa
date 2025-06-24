@@ -331,7 +331,8 @@ const LibraryPage = (props) => {
                 block: "start",
               });
             }, 100);
-          }}>
+          }}
+        >
           <DefaultInput
             inputType="text"
             inputCLassName="library-input-search form-control"
@@ -351,7 +352,8 @@ const LibraryPage = (props) => {
 
       <LibraryContainerCards
         className="library-container-cards"
-        ref={resultsRef}>
+        ref={resultsRef}
+      >
         {loading ? (
           <ContainerLoading>
             <Loading speedborder="0.7" fonts="8" size="1" />
@@ -378,7 +380,7 @@ const LibraryPage = (props) => {
                   date={dataItem.date_created}
                   onClick={() => {
                     const idx = imageSlides.findIndex(
-                      (img) => img.src === link.href
+                      (img) => img.src === link.href,
                     );
                     setLightboxIndex(idx);
                     setLightboxOpen(true);

@@ -94,14 +94,7 @@ export async function fetchEpicImagesByDate(date) {
 
 // 6. Buscar imagens de vários temas do universo
 export async function fetchUniverseThemes() {
-  const themes = [
-    "universe",
-    "cosmos",
-    "galaxy",
-    "stars",
-    "jupiter",
-    "saturn",
-  ];
+  const themes = ["universe", "cosmos", "galaxy", "stars", "jupiter", "saturn"];
   const results = {};
   for (const theme of themes) {
     try {

@@ -41,8 +41,6 @@ const Scale = keyframes`
   }
 `;
 
-
-
 const ContainerLoading = styled.div`
   display: flex;
   justify-content: center;
@@ -130,7 +128,8 @@ const ButtonsContainer = styled.div`
   justify-content: center;
   gap: 2rem;
   margin: 2rem 0 3rem 0;
-  @media only screen and (${devices.iphone14}), only screen and (${devices.mobileG}) {
+  @media only screen and (${devices.iphone14}),
+    only screen and (${devices.mobileG}) {
     flex-direction: column;
     align-items: center;
     gap: 1.2rem;
@@ -211,7 +210,8 @@ const UniversePage = () => {
           <ButtonThemeUniverse
             key={theme}
             active={selectedTheme === theme}
-            onClick={() => setSelectedTheme(theme)}>
+            onClick={() => setSelectedTheme(theme)}
+          >
             {themeLabels[theme]}
           </ButtonThemeUniverse>
         ))}

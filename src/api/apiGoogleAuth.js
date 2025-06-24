@@ -1,6 +1,6 @@
 // Google Auth API logic for React
 // Uses @react-oauth/google
-import { googleLogout } from '@react-oauth/google';
+import { googleLogout } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 
 export function handleGoogleLoginSuccess(credentialResponse, login) {

@@ -13,9 +13,12 @@ const ThemeButton = styled.button`
   padding: 1rem 2.5rem;
   cursor: pointer;
   font-weight: 700;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
   width: auto;
-  @media only screen and (${devices.iphone14}), only screen and (${devices.mobileG}) {
+  @media only screen and (${devices.iphone14}),
+    only screen and (${devices.mobileG}) {
     width: 100%;
     min-width: 220px;
     max-width: 400px;

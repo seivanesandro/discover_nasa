@@ -33,7 +33,7 @@ const GoogleButton = styled.button`
   font-weight: 600;
   cursor: pointer;
   margin-top: 2rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   transition: background 0.2s;
   &:hover {
     background: #f9cd74;
@@ -42,17 +42,15 @@ const GoogleButton = styled.button`
 `;
 
 const AuthContent = styled.div`
-  display: flex;  
+  display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: center;
   gap: 12rem;
-
-
 `;
 
 const TitleAuth = styled.h2`
-    margin-bottom: 2rem !important;
+  margin-bottom: 2rem !important;
 `;
 
 const DescriptionAuth = styled.p`
@@ -89,7 +87,7 @@ const Auth = () => {
           }
           onError={() => alert("Google Login Failed")}
           useOneTap
-          render={({onClick}) => (
+          render={({ onClick }) => (
             <GoogleButton onClick={onClick}>
               <FcGoogle size={28} /> Sign in with Google
             </GoogleButton>
