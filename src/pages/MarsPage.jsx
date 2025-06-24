@@ -132,7 +132,7 @@ const MarsSelectedRover = styled.select`
   font-size: 1.2rem;
   text-align: center;
   width: 50%;
-  margin: 5rem auto;
+  margin: -2rem auto 8rem auto;
 
   outline: none !important;
   background: #222222 !important;
@@ -272,6 +272,7 @@ const MarsPage = (props) => {
           world.
         </p>
       </MarsContainerHeader>
+      <label htmlFor="select-rover">Select a rover:</label>
       <MarsSelectedRover
         className="form-select mars-selected-rover"
         aria-label="Select a Mars Rover"
