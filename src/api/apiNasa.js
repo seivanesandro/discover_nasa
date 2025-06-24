@@ -91,3 +91,26 @@ export async function fetchEpicImagesByDate(date) {
     throw error;
   }
 }
+
+// 6. Buscar imagens de vários temas do universo
+export async function fetchUniverseThemes() {
+  const themes = [
+    "universe",
+    "cosmos",
+    "galaxy",
+    "stars",
+    "jupiter",
+    "saturn",
+  ];
+  const results = {};
+  for (const theme of themes) {
+    try {
+      // Busca apenas imagens, 12 primeiros resultados de cada tema
+      const items = await searchNasaMedia(theme, "image");
+      results[theme] = items.slice(0, 12);
+    } catch (error) {
+      results[theme] = [];
+    }
+  }
+  return results;
+}
