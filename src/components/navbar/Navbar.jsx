@@ -7,6 +7,8 @@ import "./Navbar.css";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Logout from "../logout/Logout";
+import { useAuth } from "../../context/AuthContext";
 
 const ImgStyle = styled.img`
   width: 130px;
@@ -43,6 +45,7 @@ const StyleNavLink = styled(NavLink)`
 
 function OffcanvasExample() {
   const [scrolled, setScrolled] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -98,6 +101,13 @@ function OffcanvasExample() {
                   <StyleNavLink to="/universe" end>
                     Universe
                   </StyleNavLink>
+                  {user ? (
+                    <Logout />
+                  ) : (
+                    <StyleNavLink to="/auth" end>
+                      Login
+                    </StyleNavLink>
+                  )}
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
