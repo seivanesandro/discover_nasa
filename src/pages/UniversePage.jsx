@@ -144,10 +144,14 @@ const CardsGrid = styled.div`
   gap: 6rem;
   width: 100%;
   max-width: 80vw;
-  margin: 1rem auto 20rem auto !important;
+  margin: 0 auto 20rem auto !important;
+  padding-top: 120px;
+  scroll-margin-top: 80px;
   @media only screen and (${devices.mobileP}) {
     max-width: 99vw;
     gap: 2rem;
+    padding-top: 110px;
+    scroll-margin-top: 50px;
   }
 `;
 
@@ -185,12 +189,48 @@ const UniversePage = () => {
     fetchData();
   }, []);
 
+  // Ref para guardar o tema anterior e evitar scroll no load inicial
+  const prevThemeRef = useRef(selectedTheme);
+
   // Preparar slides para o lightbox
   const slides = (themeData[selectedTheme] || []).map((item) => ({
     src: item.links[0].href,
     title: item.data[0].title,
     description: item.data[0].description || "",
   }));
+
+  // Solução completa de scroll usando abordagem direta
+  useEffect(() => {
+    // Só executar o scroll quando não estiver carregando e o tema mudar
+    if (!loading && prevThemeRef.current !== selectedTheme) {
+      // Garantir que o DOM esteja totalmente atualizado antes do scroll
+      setTimeout(() => {
+        if (resultRef.current) {
+          // Usar scrollIntoView com configurações mais específicas
+          try {
+           
+            const yOffset = -70; 
+            const elementTop = resultRef.current.getBoundingClientRect().top;
+            const absoluteY = elementTop + window.scrollY + yOffset;
+            
+            window.scroll({
+              top: absoluteY,
+              behavior: "smooth"
+            });
+          } catch (err) {
+            // Fallback se o método acima falhar
+            resultRef.current.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+          }
+        }
+      }, 150);
+    }
+    
+    // Atualiza a referência do tema anterior
+    prevThemeRef.current = selectedTheme;
+  }, [selectedTheme, loading]);
 
   return (
     <UniverseContainer className="universe-page-container container-fluid text-center">
@@ -229,10 +269,6 @@ const UniversePage = () => {
             active={selectedTheme === theme}
             onClick={() => {
               setSelectedTheme(theme);
-              // set time out to focus card after click on button theme
-              setTimeout(() => {
-                window.scrollTo({ top: 800, behavior: "smooth" });
-              }, 1);
             }}
           >
             {themeLabels[theme]}

@@ -35,8 +35,8 @@ High-res laptop or desktop: 1920 x 1080.
 media styled components 
 @media only screen and (${devices.fourk }) {}
 @media only screen and (${devices.portatilL }) {}
-@media only screen and (${devices.portatil }) {}
 @media only screen and (${devices.portatilS }) {}
+@media only screen and (${devices.portatil }) {}
 @media only screen and (${devices.tablet }) {}
 @media only screen and (${devices.iphone14 }) {}
 @media only screen and (${devices.mobileG }) {}
