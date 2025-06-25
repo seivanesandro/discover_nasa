@@ -71,6 +71,7 @@ const VideoPlayerComponent = ({ nasa_id, poster }) => {
           controls
           poster={poster}
           className="video-player"
+          style={{ boxShadow: "none" }}
         >
           <track kind="captions" srcLang="en" label="English" />
           <track kind="captions" srcLang="pt" label="Português" />

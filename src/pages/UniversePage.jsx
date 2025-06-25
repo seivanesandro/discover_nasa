@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { fetchUniverseThemes } from "../api/apiNasa";
 
@@ -87,7 +87,7 @@ const UniverseContainer = styled.div`
   background-position: center;
   background-attachment: fixed;
   animation: ${Show} 1.5s ease-out;
-  
+
   @media only screen and (${devices.tablet}) {
     background-position: center top;
     min-height: 100svh;
@@ -100,7 +100,7 @@ const UniverseContainerHeader = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  margin: 18rem 35rem 1rem 35rem;
+  margin: 13rem 35rem 15rem 35rem;
   align-items: center;
   animation: ${Scale} 1.1s ease-out;
   @media only screen and (${devices.vivusBook}) {
@@ -128,7 +128,7 @@ const ButtonsContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  margin: 2rem 0 3rem 0;
+  margin: 2rem 0 0 0;
   @media only screen and (${devices.iphone14}),
     only screen and (${devices.mobileG}) {
     flex-direction: column;
@@ -144,7 +144,7 @@ const CardsGrid = styled.div`
   gap: 6rem;
   width: 100%;
   max-width: 80vw;
-  margin: 10rem auto 20rem auto !important;
+  margin: 1rem auto 20rem auto !important;
   @media only screen and (${devices.mobileP}) {
     max-width: 99vw;
     gap: 2rem;
@@ -167,6 +167,7 @@ const UniversePage = () => {
   const [error, setError] = useState(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const resultRef = useRef(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -205,13 +206,34 @@ const UniversePage = () => {
           the universe’s secrets, colors, and stories. Enjoy your cosmic
           adventure!
         </p>
+        <p className="universe-description">
+          Each theme on this page opens a new window to the universe: from the
+          vastness of the cosmos and the birth of galaxies, to the brilliance of
+          distant stars and the majesty of our gas giants, Jupiter and Saturn.
+          Let yourself be transported by images that capture the mystery and
+          beauty of space, carefully curated to spark your imagination and
+          curiosity.
+        </p>
+        <p className="universe-description">
+          Whether you want to marvel at the swirling clouds of Jupiter, the
+          golden rings of Saturn, or the infinite tapestry of stars and
+          galaxies, this gallery is your portal to the unknown. Explore, learn,
+          and be inspired by the wonders that lie beyond our world—every click
+          is a step deeper into the universe!
+        </p>
       </UniverseContainerHeader>
       <ButtonsContainer className="universe-buttons-container">
         {Object.keys(themeLabels).map((theme) => (
           <ButtonThemeUniverse
             key={theme}
             active={selectedTheme === theme}
-            onClick={() => setSelectedTheme(theme)}
+            onClick={() => {
+              setSelectedTheme(theme);
+              // set time out to focus card after click on button theme
+              setTimeout(() => {
+                window.scrollTo({ top: 800, behavior: "smooth" });
+              }, 1);
+            }}
           >
             {themeLabels[theme]}
           </ButtonThemeUniverse>
@@ -232,13 +254,14 @@ const UniversePage = () => {
           <MessageComponent messageFetch="No images today found for this theme." />
         </ContainerMessage>
       ) : (
-        <CardsGrid className="universe-cards-grid">
+        <CardsGrid className="universe-cards-grid" ref={resultRef}>
           {(themeData[selectedTheme] || []).map((item, idx) => (
             <CardUniverse
               key={item.data[0].nasa_id + idx}
               image={item.links[0].href}
               title={item.data[0].title}
               description={item.data[0].description?.slice(0, 180) || ""}
+              date={item.data[0].date_created}
               onClick={() => {
                 setLightboxIndex(idx);
                 setLightboxOpen(true);

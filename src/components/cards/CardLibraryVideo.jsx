@@ -18,6 +18,7 @@ const Card = styled.div`
   transition: transform 0.2s;
   &:hover {
     transform: scale(1.03);
+    background: linear-gradient(135deg, #232526 0%, #2b5876 100%);
     box-shadow: 0 4px 24px #000a;
   }
   @media only screen and (${devices.iphone14}) {
@@ -27,7 +28,7 @@ const Card = styled.div`
   }
 `;
 
-const ContianerDescription = styled.div`
+const ContainerDescription = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -45,20 +46,20 @@ const CardLibraryVideo = ({ title, nasa_id, poster, description, date }) => (
   <Card>
     <h4 style={{ textAlign: "center" }}>{title}</h4>
     <VideoPlayerComponent nasa_id={nasa_id} poster={poster} />
-    <ContianerDescription className="contianer-description">
+    <ContainerDescription className="container-description">
       <p className="text-start p-description">
         <strong className="p-description">Description: </strong>
         {description?.slice(0, 120)}...
       </p>
       <ContainerDescriptionExtra className="container-description-extra">
         <p className="text-start">
-          <strong className="p-description">Data:</strong> {date?.slice(0, 10)}
+          <strong className="p-description">DATE:</strong> {date?.slice(0, 10)}
         </p>
         <p className="text-start">
-          <strong className="p-description">Type:</strong> vídeo
+          <strong className="p-description">TYPE:</strong> vídeo
         </p>
       </ContainerDescriptionExtra>
-    </ContianerDescription>
+    </ContainerDescription>
   </Card>
 );
 

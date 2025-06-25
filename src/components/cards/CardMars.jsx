@@ -6,13 +6,30 @@ import { devices } from "../../utils/constantes";
 
 const CardMarsStyle = styled.div`
   margin-bottom: 20px;
-  width: 16rem;
-  border: 1px solid rgba(249, 205, 116, 28%) !important;
+  width: 20rem;
+  border: 1px solid transparent !important;
   border-radius: 6px;
-  background: #222;
+  background: linear-gradient(135deg, #232526 0%, #414345 100%);
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(249, 205, 116, 28%);
+    box-shadow: 0 2px 4px rgba(249, 205, 116, 28%);
+    background: linear-gradient(135deg, #232526 0%, #2b5876 100%);
+  }
+
+  @media only screen and (${devices.tablet}) {
+    width: 19rem;
+  }
+
+  @media only screen and (${devices.iphone14}) {
+    width: 20rem;
+  }
+  @media only screen and (${devices.mobileG}) {
+    width: 20rem;
+  }
+  @media only screen and (${devices.mobileM}) {
+  }
+  @media only screen and (${devices.mobileP}) {
+    width: 17rem;
   }
 `;
 

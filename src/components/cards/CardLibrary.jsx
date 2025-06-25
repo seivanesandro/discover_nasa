@@ -72,12 +72,13 @@ const CardDesc = styled.p`
   font-size: 0.97rem;
   color: #e0e0e0;
   margin-bottom: 0.7rem;
-  text-align: start;
+  text-align: justify;
   min-height: 3.5rem;
 `;
 
 const CardFooter = styled.div`
   margin-top: auto;
+  margin-left: 1rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -93,8 +94,8 @@ const CardLibrary = ({ title, imgSrc, description, date, onClick }) => (
     <CardImage src={imgSrc} alt={title} onClick={onClick} />
     <CardDesc>{description?.slice(0, 120)}...</CardDesc>
     <CardFooter>
-      <span>Data: {date?.slice(0, 10)}</span>
-      <span>Tipo: imagem</span>
+      <span>DATE: {date?.slice(0, 10)}</span>
+      <span>TYPE: imagem</span>
     </CardFooter>
   </Card>
 );

@@ -93,7 +93,7 @@ const LibraryContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 3rem;
-  padding: 5rem 0 3rem 0 !important; // FIXME: padding para incluir nas outras pages
+  padding: 5rem 0 3rem 0 !important;
   background-image: url(${bgimg});
   background-size: cover;
   background-repeat: no-repeat;
@@ -301,7 +301,7 @@ const LibraryPage = (props) => {
           public data from humanity's leading space agency.
         </p>
         <p className="library-description">
-          ccess everything from stunning{" "}
+          Access everything from stunning{" "}
           <strong>Astronomy Pictures of the Day to Mars Rover imagery</strong>,
           real-time Earth observation data, and detailed information on
           near-Earth objects.{" "}

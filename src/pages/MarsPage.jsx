@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import { fetchLatestSol, fetchMarsPhotos } from "../api/apiNasa";
 import ErrorComponent from "../components/error/ErrorComponent";
@@ -104,7 +104,7 @@ const MarsContainerHeader = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin: 20rem 35rem 10rem 35rem;
+  margin: 12rem 35rem 1rem 35rem;
   text-align: left !important;
   animation: ${Scale} 1.1s ease-out;
 
@@ -112,20 +112,20 @@ const MarsContainerHeader = styled.div`
     margin: 20rem 8rem !important;
   }
   @media only screen and (${devices.portatilL}) {
-    margin: 20rem 8rem !important;
+    margin: 20rem 8rem 1rem 8rem !important;
   }
 
   @media only screen and (${devices.portatil}) {
-    margin: 20rem 3rem !important;
+    margin: 20rem 3rem 1rem 3rem !important;
   }
   @media only screen and (${devices.iphone14}) {
-    margin: 20rem auto !important;
+    margin: 20rem auto 1rem auto !important;
   }
   @media only screen and (${devices.mobileG}) {
-    margin: 20rem auto !important;
+    margin: 20rem auto 1rem auto !important;
   }
   @media only screen and (${devices.mobileP}) {
-    margin: 20rem auto !important;
+    margin: 20rem auto 1rem auto !important;
   }
 `;
 
@@ -181,6 +181,9 @@ const MarsPage = (props) => {
   const [error, setError] = useState(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [hasSelected, setHasSelected] = useState(false);
+  const resultsRef = useRef(null);
+  const selectRef = useRef(null);
 
   const slides = photos.slice(0, 20).map((photo) => ({
     src: photo.img_src,
@@ -218,6 +221,18 @@ const MarsPage = (props) => {
     };
     fetchData();
   }, [selectedRover]);
+
+  // Scroll to results when photos are loaded
+  useEffect(() => {
+    if (hasSelected && !loading && resultsRef.current) {
+      const yOffset = -40; // Ajusta conforme a altura do teu navbar
+      const y =
+        selectRef.current.getBoundingClientRect().top +
+        window.pageYOffset +
+        yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }, [photos, loading, hasSelected]);
 
   if (loading) {
     return (
@@ -273,18 +288,23 @@ const MarsPage = (props) => {
           world.
         </p>
       </MarsContainerHeader>
-      <label htmlFor="select-rover">Select a rover:</label>
+      <label htmlFor="select-rover" ref={selectRef}>
+        Select a rover:
+      </label>
       <MarsSelectedRover
         className="form-select mars-selected-rover"
         aria-label="Select a Mars Rover"
         id="select-rover"
         value={selectedRover}
-        onChange={(e) => setSelectRover(e.target.value)}
+        onChange={(e) => {
+          setSelectRover(e.target.value);
+          setHasSelected(true);
+        }}
       >
         <option value="curiosity">Curiosity</option>
         <option value="perseverance">Perseverance</option>
       </MarsSelectedRover>
-      <MarsContainerCards className="mars-container-cards">
+      <MarsContainerCards className="mars-container-cards" ref={resultsRef}>
         {photos.slice(0, 20).map((photo, idx) => (
           <CardMars
             key={photo.id}

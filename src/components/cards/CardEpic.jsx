@@ -10,8 +10,7 @@ const CardEpicStyle = styled.div`
 `;
 
 const EpicCardapresentation = styled.p`
-  text-align: start;
-  padding-left: 1.8rem;
+  text-align: flex-start;
 
   @media only screen and (${devices.tablet}) {
     text-align: center;
