@@ -85,9 +85,10 @@ const UniverseContainer = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
+  background-attachment: fixed;
   animation: ${Show} 1.5s ease-out;
-  @media only screen and (max-width: 768px) {
+  
+  @media only screen and (${devices.tablet}) {
     background-position: center top;
     min-height: 100svh;
   }

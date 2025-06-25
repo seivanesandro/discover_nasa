@@ -89,10 +89,11 @@ const MarsContainer = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-attachment: fixed;
+  animation: ${Show} 1.5s ease-out;
 
   animation: ${Show} 1.5s ease-out;
-  @media only screen and (max-width: 768px) {
-    background-position: center top;
+  @media only screen and (${devices.tablet}) {
     min-height: 100svh;
   }
 `;
