@@ -208,26 +208,25 @@ const UniversePage = () => {
         if (resultRef.current) {
           // Usar scrollIntoView com configurações mais específicas
           try {
-           
-            const yOffset = -70; 
+            const yOffset = -70;
             const elementTop = resultRef.current.getBoundingClientRect().top;
             const absoluteY = elementTop + window.scrollY + yOffset;
-            
+
             window.scroll({
               top: absoluteY,
-              behavior: "smooth"
+              behavior: "smooth",
             });
           } catch (err) {
             // Fallback se o método acima falhar
             resultRef.current.scrollIntoView({
               behavior: "smooth",
-              block: "start"
+              block: "start",
             });
           }
         }
       }, 150);
     }
-    
+
     // Atualiza a referência do tema anterior
     prevThemeRef.current = selectedTheme;
   }, [selectedTheme, loading]);
