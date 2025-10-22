@@ -181,7 +181,10 @@ const UniversePage = () => {
         const data = await fetchUniverseThemes();
         setThemeData(data);
       } catch (err) {
-        setError(err);
+         console.error("ERROR: ", err);
+         setError(
+           "Failed to fetch universe data. NASA API temporarily unavailable due to government shutdown. Please try again later."
+         );
       } finally {
         setLoading(false);
       }

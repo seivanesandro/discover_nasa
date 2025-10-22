@@ -213,8 +213,11 @@ const MarsPage = (props) => {
         const photos = await fetchMostRecentMarsPhotos(selectedRover, 10);
         setPhotos(photos || []);
       } catch (err) {
-        console.error("ERRO REAL:", err);
-        setError(new Error("Failed to fetch photos."));
+         console.error("ERROR: ", err);
+         setError(
+           "Failed to fetch photos. NASA API temporarily unavailable due to government shutdown. Please try again later."
+         );
+    
       } finally {
         setLoading(false);
       }

@@ -196,8 +196,9 @@ const EpicPage = () => {
         setData(images);
         setSelectedDate(date);
       } catch (err) {
+        console.error('ERROR: ', err);
         setError(
-          new Error("Failed to fetch EPIC images. Please try again later."),
+          new Error("Failed to fetch EPIC images. NASA API temporarily unavailable due to government shutdown. Please try again later."),
         );
       } finally {
         setLoad(false);

@@ -271,7 +271,8 @@ const LibraryPage = (props) => {
 
         setData(filtered);
       } catch (err) {
-        setError(new Error("Failed to fetch data from NASA."));
+        console.error('ERROR: ', err);
+        setError("Failed to fetch library data. NASA API temporarily unavailable due to government shutdown. Please try again later.");
         setData([]);
       }
       setLoading(false);
