@@ -7,10 +7,6 @@ const apiUrlEpic = process.env.REACT_APP_NASA_URL_EPIC;
 
 const apiUrlMars = process.env.REACT_APP_NASA_URL_MARS;
 const apiUrlMarsManifest = process.env.REACT_APP_NASA_URL_MARS_MANIFEST;
-//FIXME: const apiUrlMarsCuriosity = process.env.REACT_API_NASA_URL_MARS_CURIOSITY;
-//FIXME:const apiUrlMarsOpportunity = process.env.REACT_API_NASA_URL_MARS_OPPORTUNITY;
-//FIXME:const apiUrlMarsSpirit = process.env.REACT_API_NASA_URL_MARS_SPIRIT;
-//FIXME:const apiUrlMarsPerseverance = process.env.REACT_API_NASA_URL_MARS_PERSEVERANCE;
 
 // 1. APOD (Astronomy Picture of the Day)
 export async function fetchApod(count = 5) {
@@ -27,7 +23,6 @@ export async function fetchApod(count = 5) {
 // 2. Mars Rover Photos (rover: curiosity, opportunity, spirit, perseverance)
 export async function fetchMarsPhotos({ rover = "curiosity", sol = 1000 }) {
   try {
-    // Validação simples do nome do rover
     const validRovers = ["curiosity", "perseverance"];
     const roverName = validRovers.includes(rover.toLowerCase())
       ? rover.toLowerCase()
@@ -45,7 +40,8 @@ export async function fetchLatestSol(rover) {
   try {
     const url = `${apiUrlMarsManifest}/${rover}?api_key=${apiKey}`;
     const response = await axios.get(url);
-    return response.data.photo_manifest.max_sol;
+    const maxSol = response.data.photo_manifest.max_sol;
+    return maxSol;
   } catch (error) {
     throw error;
   }
@@ -54,7 +50,8 @@ export async function fetchLatestSol(rover) {
 // 3. EPIC (Earth Polychromatic Imaging Camera)
 export async function fetchEpicImages() {
   try {
-    const response = await axios.get(`${apiUrlEpic}?api_key=${apiKey}`);
+    const url = `${apiUrlEpic}?api_key=${apiKey}`;
+    const response = await axios.get(url);
     return response.data;
   } catch (error) {
     throw error;
@@ -83,9 +80,8 @@ export async function searchNasaMedia(
 // 5. epic image by date
 export async function fetchEpicImagesByDate(date) {
   try {
-    const response = await axios.get(
-      `${apiUrlEpic}/date/${date}?api_key=${apiKey}`,
-    );
+    const url = `${apiUrlEpic}/date/${date}?api_key=${apiKey}`;
+    const response = await axios.get(url);
     return response.data;
   } catch (error) {
     throw error;

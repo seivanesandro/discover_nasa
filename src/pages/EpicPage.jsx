@@ -170,20 +170,22 @@ const EpicPage = () => {
   // Função para procurar o dia mais recente com imagens (até 7 dias atrás)
   async function fetchMostRecentEpicImages(maxDays = 7) {
     const today = new Date();
+    
     for (let i = 0; i < maxDays; i++) {
       const date = new Date(today);
       date.setDate(today.getDate() - i);
       const dateStr = date.toISOString().split("T")[0];
+      
       try {
         const response = await fetchEpicImagesByDate(dateStr);
         if (response && response.length > 0) {
           return { images: response, date: dateStr };
         }
       } catch (err) {
-        // Se der erro, tenta o dia anterior
         continue;
       }
     }
+    
     return { images: [], date: null };
   }
 
@@ -196,10 +198,21 @@ const EpicPage = () => {
         setData(images);
         setSelectedDate(date);
       } catch (err) {
-        console.error('ERROR: ', err);
-        setError(
-          new Error("Failed to fetch EPIC images. NASA API temporarily unavailable due to government shutdown. Please try again later."),
-        );
+        let errorMessage = "Failed to fetch EPIC images. ";
+        
+        if (err.response?.status === 403) {
+          errorMessage += "API Key invalid or rate limit exceeded.";
+        } else if (err.response?.status === 429) {
+          errorMessage += "Too many requests. Please wait and try again.";
+        } else if (err.response?.status === 500 || err.response?.status === 503) {
+          errorMessage += "NASA API server error. Please try again later.";
+        } else if (err.message?.includes("Network Error")) {
+          errorMessage += "Network connection error. Check your internet.";
+        } else {
+          errorMessage += err.response?.data?.error?.message || err.message || "Unknown error.";
+        }
+        
+        setError(new Error(errorMessage));
       } finally {
         setLoad(false);
       }

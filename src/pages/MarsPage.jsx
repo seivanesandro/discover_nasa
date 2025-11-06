@@ -191,17 +191,36 @@ const MarsPage = (props) => {
   }));
 
   async function fetchMostRecentMarsPhotos(rover, maxTries = 10) {
-    let latestSol = await fetchLatestSol(rover);
-    for (let i = 0; i < maxTries; i++) {
-      try {
-        const data = await fetchMarsPhotos({ rover, sol: latestSol - i });
-        if (data.photos && data.photos.length > 0) {
-          return data.photos;
+    try {
+      let latestSol = await fetchLatestSol(rover);
+      
+      for (let i = 0; i < maxTries; i++) {
+        try {
+          const data = await fetchMarsPhotos({ rover, sol: latestSol - i });
+          if (data.photos && data.photos.length > 0) {
+            return data.photos;
+          }
+        } catch (err) {
+          continue;
         }
-      } catch (err) {
-        continue;
+      }
+    } catch (manifestError) {
+      const fallbackSols = rover.toLowerCase() === 'perseverance' 
+        ? [1000, 900, 800, 700, 600]
+        : [3000, 2900, 2800, 2700, 2600];
+      
+      for (const sol of fallbackSols) {
+        try {
+          const data = await fetchMarsPhotos({ rover, sol });
+          if (data.photos && data.photos.length > 0) {
+            return data.photos;
+          }
+        } catch (err) {
+          continue;
+        }
       }
     }
+    
     return [];
   }
 
@@ -213,11 +232,21 @@ const MarsPage = (props) => {
         const photos = await fetchMostRecentMarsPhotos(selectedRover, 10);
         setPhotos(photos || []);
       } catch (err) {
-         console.error("ERROR: ", err);
-         setError(
-           "Failed to fetch photos. NASA API temporarily unavailable due to government shutdown. Please try again later."
-         );
-    
+        let errorMessage = "Failed to fetch Mars photos. ";
+        
+        if (err.response?.status === 403) {
+          errorMessage += "API Key invalid or rate limit exceeded.";
+        } else if (err.response?.status === 429) {
+          errorMessage += "Too many requests. Please wait and try again.";
+        } else if (err.response?.status === 500 || err.response?.status === 503) {
+          errorMessage += "NASA API server error. Please try again later.";
+        } else if (err.message?.includes("Network Error")) {
+          errorMessage += "Network connection error. Check your internet.";
+        } else {
+          errorMessage += err.response?.data?.error?.message || err.message || "Unknown error.";
+        }
+        
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
